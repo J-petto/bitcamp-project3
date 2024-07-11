@@ -3,10 +3,84 @@
  */
 package bitcamp.project3;
 
+import bitcamp.project3.command.Command;
+import bitcamp.project3.command.MainCategory;
+import bitcamp.project3.util.Prompt;
+
+import java.util.HashMap;
+import java.util.Stack;
+
 public class App {
+    String[] menus = {"계단", "오른쪽 통로", "왼쪽 통로", "뒤로가기"};
+    Stack<String> menuPath = new Stack<>();
+    HashMap<String, Command> mainHash = new HashMap<>();
+    HashMap<String, Command> subHash = new HashMap<>();
+
+    public App(){
+        mainHash.put("계단", new MainCategory("계단"));
+        mainHash.put("오른쪽 통로", new MainCategory("오른쪽 통로"));
+        mainHash.put("왼쪽 통로", new MainCategory("왼쪽 통로"));
+    }
+
     public static void main(String[] args) {
 //        int width = 60;
 //        int height = 15;
         System.out.println("[로그인]");
+        new App().execute();
+    }
+
+    void execute() {
+        menuPath.push("로비");
+
+        printMenu();
+        String command;
+        while (true) {
+            command = Prompt.input("%s>", getMenuPathTitle(menuPath));
+            if (command.equals("menu")) {
+                printMenu();
+                continue;
+            }else {
+                int menuNo = Integer.parseInt(command);
+                String menuTitle = getMenuTitle(menuNo);
+                if(menuTitle == null){
+                    System.out.println("유효한 메뉴가 아닙니다.");
+                }else if(menuTitle.equals("뒤로가기")){
+                    break;
+                }else {
+                    processMenu(menuTitle);
+                }
+            }
+        }
+    }
+
+    private void processMenu(String menuTitle) {
+        Command command = mainHash.get(menuTitle);
+        if(command == null){
+            System.out.println("해당 메뉴의 명령을 처리할 수 없습니다.");
+            return;
+        }
+        command.execute(menuPath);
+    }
+
+    private String getMenuTitle(int menuNo) {
+        return menus[menuNo - 1];
+    }
+
+    private void printMenu() {
+        int count = 1;
+        for (String menu : menus) {
+            System.out.printf("%s. %s\n", count++, menu);
+        }
+    }
+
+    private String getMenuPathTitle(Stack<String> menuPath) {
+        StringBuilder strBuilder = new StringBuilder();
+        for (String string : menuPath) {
+            if (!strBuilder.isEmpty()) {
+                strBuilder.append("/");
+            }
+            strBuilder.append(string);
+        }
+        return strBuilder.toString();
     }
 }
