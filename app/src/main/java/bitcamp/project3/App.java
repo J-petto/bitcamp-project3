@@ -4,11 +4,9 @@
 package bitcamp.project3;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+//        int width = 60;
+//        int height = 15;
+        System.out.println("[로그인]");
     }
 }
