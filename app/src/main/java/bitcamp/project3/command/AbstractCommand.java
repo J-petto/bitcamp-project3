@@ -49,7 +49,7 @@ public abstract class AbstractCommand implements Command{
 
     private boolean checkGo() {
         while (true) {
-            String toGo = Prompt.input("%s 책장으로 갈까?", menuTitle);
+            String toGo = Prompt.input("%s 갈까?", getCheckGo(menuTitle));
             if (toGo.equalsIgnoreCase("n")) {
                 return false;
             } else if (toGo.equalsIgnoreCase("y")) {
@@ -60,13 +60,14 @@ public abstract class AbstractCommand implements Command{
         }
     }
 
+    abstract protected String getCheckGo(String menuTitle);
+
     private void printMenus() {
         String[] menus = getMenus();
         System.out.printf("[%s]\n", menuTitle);
         for (int i = 0; i < menus.length; i++) {
             System.out.printf("%d. %s\n", (i + 1), menus[i]);
         }
-        System.out.println("9. 이전");
     }
 
     private String getMenuTitle(int menuNo) {

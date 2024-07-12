@@ -4,7 +4,9 @@
 package bitcamp.project3;
 
 import bitcamp.project3.command.Command;
-import bitcamp.project3.command.MainCategory;
+import bitcamp.project3.command.mainCategory.MediaRoom;
+import bitcamp.project3.command.mainCategory.OtherBooks;
+import bitcamp.project3.command.mainCategory.KoreanBooks;
 import bitcamp.project3.util.Prompt;
 
 import java.util.HashMap;
@@ -16,15 +18,13 @@ public class App {
     HashMap<String, Command> mainHash = new HashMap<>();
     HashMap<String, Command> subHash = new HashMap<>();
 
-    public App(){
-        mainHash.put("계단", new MainCategory("계단"));
-        mainHash.put("오른쪽 통로", new MainCategory("오른쪽 통로"));
-        mainHash.put("왼쪽 통로", new MainCategory("왼쪽 통로"));
+    public App() {
+        mainHash.put("계단", new KoreanBooks("계단", menuPath));
+        mainHash.put("오른쪽 통로", new OtherBooks("오른쪽 통로", menuPath));
+        mainHash.put("왼쪽 통로", new MediaRoom("왼쪽 통로", menuPath));
     }
 
     public static void main(String[] args) {
-//        int width = 60;
-//        int height = 15;
         System.out.println("[로그인]");
         new App().execute();
     }
@@ -39,23 +39,23 @@ public class App {
             if (command.equals("menu")) {
                 printMenu();
                 continue;
-            }else {
-                int menuNo = Integer.parseInt(command);
-                String menuTitle = getMenuTitle(menuNo);
-                if(menuTitle == null){
-                    System.out.println("유효한 메뉴가 아닙니다.");
-                }else if(menuTitle.equals("뒤로가기")){
-                    break;
-                }else {
-                    processMenu(menuTitle);
-                }
+            }
+            int menuNo = Integer.parseInt(command);
+            String menuTitle = getMenuTitle(menuNo);
+            if (menuTitle == null) {
+                System.out.println("유효한 메뉴가 아닙니다.");
+            } else if (menuTitle.equals("뒤로가기")) {
+                return;
+            } else {
+                processMenu(menuTitle);
+
             }
         }
     }
 
     private void processMenu(String menuTitle) {
         Command command = mainHash.get(menuTitle);
-        if(command == null){
+        if (command == null) {
             System.out.println("해당 메뉴의 명령을 처리할 수 없습니다.");
             return;
         }
@@ -63,7 +63,11 @@ public class App {
     }
 
     private String getMenuTitle(int menuNo) {
-        return menus[menuNo - 1];
+        return isValidateMenu(menuNo) ? menus[menuNo - 1] : null;
+    }
+
+    private boolean isValidateMenu(int menuNo) {
+        return menuNo >= 1 && menuNo <= menus.length;
     }
 
     private void printMenu() {
