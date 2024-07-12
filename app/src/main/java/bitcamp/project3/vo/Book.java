@@ -28,10 +28,11 @@ public class Book {
                 case "한국 서적": bookCode += mainCategory.KOREAN; break;
                 case "외국 서적": bookCode += mainCategory.OTHER; break;
                 case "미디어": bookCode += mainCategory.MEDIA; break;
+
                 case "경제": bookCode += subCategory.ECONOMY; break;
-                case "인문학": bookCode += subCategory.HUMAN;
-                case "과학": bookCode += subCategory.SCIENCE;
-                case "자기계발": bookCode += subCategory.SELF_HELP;
+                case "인문학": bookCode += subCategory.HUMAN; break;
+                case "과학": bookCode += subCategory.SCIENCE; break;
+                case "자기계발": bookCode += subCategory.SELF_HELP; break;
             }
         }
         this.bookCode = bookCode + getSeqBookId();

@@ -1,5 +1,6 @@
-package bitcamp.project3.command;
+package bitcamp.project3.command.mainCategory;
 
+import bitcamp.project3.PrintMap;
 import bitcamp.project3.util.Prompt;
 
 import java.util.Stack;
@@ -7,6 +8,8 @@ import java.util.Stack;
 public abstract class AbstractCommand implements Command{
 
     protected String menuTitle;
+    PrintMap mapPrinter = new PrintMap();
+
 
     public AbstractCommand(String menuTitle){
         this.menuTitle = menuTitle;
@@ -19,6 +22,7 @@ public abstract class AbstractCommand implements Command{
         }
 
         menuPath.push(menuTitle);
+        mapPrinter.printBox(menuPath);
         printMenus();
 
         while (true) {

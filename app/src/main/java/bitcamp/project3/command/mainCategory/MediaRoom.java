@@ -1,6 +1,5 @@
 package bitcamp.project3.command.mainCategory;
 
-import bitcamp.project3.command.AbstractCommand;
 import bitcamp.project3.command.subCategory.Humanities;
 import bitcamp.project3.command.subCategory.SubCommand;
 
