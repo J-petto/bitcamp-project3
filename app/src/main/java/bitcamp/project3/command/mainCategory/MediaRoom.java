@@ -1,8 +1,8 @@
 package bitcamp.project3.command.mainCategory;
 
 import bitcamp.project3.command.AbstractCommand;
-import bitcamp.project3.command.Command;
-import bitcamp.project3.command.Humanities;
+import bitcamp.project3.command.subCategory.Humanities;
+import bitcamp.project3.command.subCategory.SubCommand;
 
 import java.util.HashMap;
 import java.util.Stack;
@@ -10,7 +10,7 @@ import java.util.Stack;
 public class MediaRoom extends AbstractCommand {
     String[] menus = {"인문학", "자기계발", "경제", "과학", "뒤로가기"};
 
-    HashMap<String, Command> subHash = new HashMap<>();
+    HashMap<String, SubCommand> subHash = new HashMap<>();
     Stack<String> menuPath;
 
     public MediaRoom(String menuTitle, Stack<String> menuPath) {

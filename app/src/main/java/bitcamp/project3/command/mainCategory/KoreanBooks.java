@@ -1,10 +1,9 @@
 package bitcamp.project3.command.mainCategory;
 
 import bitcamp.project3.command.AbstractCommand;
-import bitcamp.project3.command.Command;
-import bitcamp.project3.command.Humanities;
+import bitcamp.project3.command.subCategory.Humanities;
+import bitcamp.project3.command.subCategory.SubCommand;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -13,7 +12,7 @@ public class KoreanBooks extends AbstractCommand {
 
     Stack<String> menuPath;
 
-    HashMap<String, Command> subHash = new HashMap<>();
+    HashMap<String, SubCommand> subHash = new HashMap<>();
     public KoreanBooks(String menuTitle, Stack<String> menuPath) {
         super(menuTitle);
         this.menuPath = menuPath;
@@ -29,7 +28,7 @@ public class KoreanBooks extends AbstractCommand {
 
     @Override
     protected void processMenu(String menuName) {
-        Command command = subHash.get(menuName);
+        SubCommand command = subHash.get(menuName);
         if(command == null){
             System.out.println("해당 메뉴의 명령을 처리할 수 없습니다.");
             return;
