@@ -9,8 +9,9 @@ import bitcamp.project3.command.mainCategory.MediaRoom;
 import bitcamp.project3.command.mainCategory.OtherBooks;
 import bitcamp.project3.command.mainCategory.KoreanBooks;
 import bitcamp.project3.util.Prompt;
+import bitcamp.project3.util.dataReader;
 import bitcamp.project3.vo.User;
-
+import bitcamp.project3.vo.Book;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -36,7 +37,7 @@ public class App {
     System.out.println("[로그인]");
     while (true) {
       printLoginMenu();
-      String command = Prompt.input(" > ");
+      String command = Prompt.input("> ");
       try {
         int menuNo = Integer.parseInt(command);
         String menuTitle = getloginMenuTitle(menuNo, loginMenus);
@@ -52,7 +53,6 @@ public class App {
   }
 
   void execute(User loginUser) {
-    User user = loginUser;
     menuPath.push("로비");
     mapPrinter.printBox(menuPath);
     printMenu();
@@ -99,8 +99,8 @@ public class App {
       case "회원가입":
         Login.authUser();
         break;
-      case "비밀번호 찾기":
-        System.out.println("비밀번호 찾기 입니다.");
+      case "비밀번호 분실":
+        Login.reSetUserPassword();
         break;
       case "종료":
         System.out.println("시스템을 종료합니다.");

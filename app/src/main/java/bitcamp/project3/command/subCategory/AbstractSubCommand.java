@@ -4,6 +4,7 @@ import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public abstract class AbstractSubCommand implements SubCommand{
@@ -65,7 +66,7 @@ public abstract class AbstractSubCommand implements SubCommand{
     abstract protected String getCheckGo(String menuTitle);
 
     private void printMenus() {
-        ArrayList<Book> menus = getMenus();
+        List<Book> menus = getMenus();
         System.out.printf("[%s]\n", menuTitle);
         for (int i = 0; i < menus.size(); i++) {
             String bookTitle = menus.get(i).getBookTitle();
@@ -74,12 +75,12 @@ public abstract class AbstractSubCommand implements SubCommand{
     }
 
     private String getMenuTitle(int menuNo) {
-        ArrayList<Book> menus = getMenus();
+        List<Book> menus = getMenus();
         return isValidateMenu(menuNo) ? menus.get(menuNo - 1).getBookTitle() : null;
     }
 
     private boolean isValidateMenu(int menuNo) {
-        ArrayList<Book> menus = getMenus();
+        List<Book> menus = getMenus();
         return menuNo >= 1 && menuNo <= menus.size();
     }
 
@@ -96,5 +97,5 @@ public abstract class AbstractSubCommand implements SubCommand{
 
    abstract protected void processMenu(int bookNo);
 
-   abstract protected ArrayList<Book> getMenus();
+   abstract protected List<Book> getMenus();
 }

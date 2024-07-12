@@ -20,6 +20,7 @@ public class KoreanBooks extends AbstractCommand {
         subHash.put("경제", new Humanities("경제"));
         subHash.put("과학", new Humanities("과학"));
     }
+
     @Override
     protected String getCheckGo(String menuTitle) {
         return menuTitle + "(한국서적)";

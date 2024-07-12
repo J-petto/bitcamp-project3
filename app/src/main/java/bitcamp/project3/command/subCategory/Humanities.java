@@ -1,15 +1,15 @@
 package bitcamp.project3.command.subCategory;
 
 import bitcamp.project3.util.Prompt;
+import bitcamp.project3.util.dataReader;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.BookList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Humanities extends AbstractSubCommand {
-    BookList bookList = new BookList();
-
-    ArrayList<Book> books = bookList.getBooks();
+    public List<Book> books = new dataReader().listReader();
 
     protected String menuTitle;
 
@@ -60,7 +60,7 @@ public class Humanities extends AbstractSubCommand {
     }
 
     @Override
-    protected ArrayList<Book> getMenus() {
+    protected List<Book> getMenus() {
         return books;
     }
 
