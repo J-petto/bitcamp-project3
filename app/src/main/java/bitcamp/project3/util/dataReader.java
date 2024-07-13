@@ -41,7 +41,7 @@ public class dataReader {
                     new FileReader(userHome + "/git/bitcamp-project3/database/book/books.txt"));
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
+                String[] parts = line.split(", ");
                 if (parts.length == 4) {
                     books.add(new Book(parts[0], parts[1], parts[2], parts[3]));
                 }

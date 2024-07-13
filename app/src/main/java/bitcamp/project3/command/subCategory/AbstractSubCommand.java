@@ -2,6 +2,7 @@ package bitcamp.project3.command.subCategory;
 
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Stack;
 public abstract class AbstractSubCommand implements SubCommand{
 
     protected String menuTitle;
+    private List<Book> sortBooks;
 
     public AbstractSubCommand(String menuTitle){
         this.menuTitle = menuTitle;
@@ -22,12 +24,12 @@ public abstract class AbstractSubCommand implements SubCommand{
         }
 
         menuPath.push(menuTitle);
-        printMenus();
+        printMenus(menuPath);
 
         while (true) {
             String command = Prompt.input("%s>", getMenuPathTitle(menuPath));
             if (command.equals("menu")) {
-                printMenus();
+                printMenus(menuPath);
                 continue;
             }
 
@@ -42,7 +44,7 @@ public abstract class AbstractSubCommand implements SubCommand{
                     menuPath.pop();
                     return;
                 }
-                processMenu(menuNo);
+                processMenu(menuNo, sortBooks);
 
             } catch (NumberFormatException ex) {
                 System.out.println("숫자로 메뉴 번호를 입력하세요.");
@@ -65,13 +67,38 @@ public abstract class AbstractSubCommand implements SubCommand{
 
     abstract protected String getCheckGo(String menuTitle);
 
-    private void printMenus() {
-        List<Book> menus = getMenus();
+    private void printMenus(Stack<String> menuPath) {
+        List<Book> books = getMenus();
+        sortBooks = sortBooks(menuPath, books);
+
         System.out.printf("[%s]\n", menuTitle);
-        for (int i = 0; i < menus.size(); i++) {
-            String bookTitle = menus.get(i).getBookTitle();
+        for (int i = 0; i < sortBooks.size(); i++) {
+            String bookTitle = sortBooks.get(i).getBookTitle();
             System.out.printf("%d. %s\n", (i + 1), bookTitle);
         }
+    }
+
+    private List<Book> sortBooks(Stack<String> menuPath, List<Book> books){
+        List<Book> sortBooks = new ArrayList<>();
+        String mainPath = menuPath.get(1);
+        mainPath = switch (mainPath) {
+            case "계단" -> "국내서적";
+            case "오른쪽 통로" -> "외국서적";
+            case "왼쪽 통호" -> "미디어";
+            default -> mainPath;
+        };
+        String subPath = menuPath.get(2);
+
+        for(Book book : books){
+            if(mainPath.equals(book.getMainCategory())){
+                System.out.println(book.getBookTitle());
+                if(subPath.equals(book.getSubCategory())){
+                    System.out.println(book.getBookTitle());
+                    sortBooks.add(book);
+                }
+            }
+        }
+        return sortBooks;
     }
 
     private String getMenuTitle(int menuNo) {
@@ -95,7 +122,7 @@ public abstract class AbstractSubCommand implements SubCommand{
         return strBuilder.toString();
     }
 
-   abstract protected void processMenu(int bookNo);
+   abstract protected void processMenu(int bookNo, List<Book> books);
 
    abstract protected List<Book> getMenus();
 }

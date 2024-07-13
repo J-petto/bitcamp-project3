@@ -21,8 +21,8 @@ public class Humanities extends AbstractSubCommand {
     }
 
     @Override
-    protected void processMenu(int bookNo) {
-        Book book = books.get(bookNo - 1);
+    protected void processMenu(int bookNo, List<Book> sortBooks) {
+        Book book = sortBooks.get(bookNo - 1);
         while (true) {
             String command = Prompt.input("%s를 대여하시겠습니까?", book.getBookTitle());
             if (command.equalsIgnoreCase("y")) {
