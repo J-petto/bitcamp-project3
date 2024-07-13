@@ -74,21 +74,46 @@ public class Login {
     }
   }
 
+//  private static void saveUser(User user) {
+//    String datName = user.getUserID();
+//    try (FileOutputStream fos = new FileOutputStream(
+//        "/home/kei/git/bitcamp-project3/database/user/" + datName + ".dat");
+//        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+//      oos.writeObject(user);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
+//  }
+
+  // 유저 홈을 받아와 유동적으로 연결
   private static void saveUser(User user) {
     String datName = user.getUserID();
+    String userHome = System.getProperty("user.home");
     try (FileOutputStream fos = new FileOutputStream(
-        "/home/kei/git/bitcamp-project3/database/user/" + datName + ".dat");
-        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            userHome + "/git/bitcamp-project3/database/user/" + datName + ".dat");
+         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
       oos.writeObject(user);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
+//  private static User loadUser(String userID) {
+//    try (FileInputStream fis = new FileInputStream(
+//        "/home/kei/git/bitcamp-project3/database/user/" + userID + ".dat");
+//        ObjectInputStream ois = new ObjectInputStream(fis)) {
+//      return (User) ois.readObject();
+//    } catch (IOException | ClassNotFoundException e) {
+//      return null;
+//    }
+//  }
+
+  // UserHome을 받아와 유동적 처리
   private static User loadUser(String userID) {
+    String userHome = System.getProperty("user.home");
     try (FileInputStream fis = new FileInputStream(
-        "/home/kei/git/bitcamp-project3/database/user/" + userID + ".dat");
-        ObjectInputStream ois = new ObjectInputStream(fis)) {
+            userHome + "/git/bitcamp-project3/database/user/" + userID + ".dat");
+         ObjectInputStream ois = new ObjectInputStream(fis)) {
       return (User) ois.readObject();
     } catch (IOException | ClassNotFoundException e) {
       return null;

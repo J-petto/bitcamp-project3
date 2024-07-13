@@ -23,6 +23,7 @@ public class PrintMap {
 
         for(int w = 50; w < 50 + stair.length(); w++){
             box[w][1] = '#';
+            box[w][2] = stair.charAt(w - 50);
         }
 
         for(int h = 0; h < height; h++){

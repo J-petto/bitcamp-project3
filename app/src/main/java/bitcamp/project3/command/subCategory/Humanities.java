@@ -3,9 +3,7 @@ package bitcamp.project3.command.subCategory;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.dataReader;
 import bitcamp.project3.vo.Book;
-import bitcamp.project3.vo.BookList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Humanities extends AbstractSubCommand {

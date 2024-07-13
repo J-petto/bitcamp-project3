@@ -68,7 +68,6 @@ public class App {
       if (menuTitle == null) {
         System.out.println("유효한 메뉴가 아닙니다.");
       } else if (menuTitle.equals("뒤로가기")) {
-
         break;
       } else {
         processMenu(menuTitle);
