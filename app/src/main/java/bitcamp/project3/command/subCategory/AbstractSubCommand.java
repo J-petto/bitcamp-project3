@@ -2,7 +2,6 @@ package bitcamp.project3.command.subCategory;
 
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ public abstract class AbstractSubCommand implements SubCommand{
 
     protected String menuTitle;
     private List<Book> sortBooks;
+    protected Stack<String> menuPath;
 
     public AbstractSubCommand(String menuTitle){
         this.menuTitle = menuTitle;
@@ -24,6 +24,7 @@ public abstract class AbstractSubCommand implements SubCommand{
         }
 
         menuPath.push(menuTitle);
+        this.menuPath = menuPath;
         printMenus(menuPath);
 
         while (true) {
@@ -81,6 +82,7 @@ public abstract class AbstractSubCommand implements SubCommand{
 
     private List<Book> sortBooks(Stack<String> menuPath, List<Book> books){
         List<Book> sortBooks = new ArrayList<>();
+
         String mainPath = menuPath.get(1);
         mainPath = switch (mainPath) {
             case "계단" -> "국내서적";
@@ -92,9 +94,7 @@ public abstract class AbstractSubCommand implements SubCommand{
 
         for(Book book : books){
             if(mainPath.equals(book.getMainCategory())){
-                System.out.println(book.getBookTitle());
                 if(subPath.equals(book.getSubCategory())){
-                    System.out.println(book.getBookTitle());
                     sortBooks.add(book);
                 }
             }
