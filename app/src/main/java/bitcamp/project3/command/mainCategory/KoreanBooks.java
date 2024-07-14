@@ -4,17 +4,13 @@ import bitcamp.project3.command.subCategory.Humanities;
 import bitcamp.project3.command.subCategory.SubCommand;
 
 import java.util.HashMap;
-import java.util.Stack;
 
 public class KoreanBooks extends AbstractCommand {
     String[] menus = {"인문학", "자기계발", "경제", "과학", "뒤로가기"};
 
-    Stack<String> menuPath;
-
     HashMap<String, SubCommand> subHash = new HashMap<>();
-    public KoreanBooks(String menuTitle, Stack<String> menuPath) {
+    public KoreanBooks(String menuTitle) {
         super(menuTitle);
-        this.menuPath = menuPath;
         subHash.put("인문학", new Humanities("인문학"));
         subHash.put("자기계발", new Humanities("자기계발"));
         subHash.put("경제", new Humanities("경제"));
@@ -23,7 +19,7 @@ public class KoreanBooks extends AbstractCommand {
 
     @Override
     protected String getCheckGo(String menuTitle) {
-        return menuTitle + "(한국서적)";
+        return menuTitle + "(국내서적)";
     }
 
     @Override

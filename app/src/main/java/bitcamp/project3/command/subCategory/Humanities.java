@@ -7,7 +7,8 @@ import bitcamp.project3.vo.Book;
 import java.util.List;
 
 public class Humanities extends AbstractSubCommand {
-    public List<Book> books = new dataReader().listReader();
+    dataReader reader = dataReader.getInstance();
+    public List<Book> books = reader.getBooks();
 
     protected String menuTitle;
 

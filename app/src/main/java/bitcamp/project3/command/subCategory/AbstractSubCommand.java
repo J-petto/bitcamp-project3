@@ -32,6 +32,10 @@ public abstract class AbstractSubCommand implements SubCommand{
                 printMenus(menuPath);
                 continue;
             }
+            if (command.equals("9")) {
+                menuPath.pop();
+                return;
+            }
 
             try {
                 int menuNo = Integer.parseInt(command);
@@ -39,10 +43,6 @@ public abstract class AbstractSubCommand implements SubCommand{
                 if (menuName == null) {
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
                     continue;
-                }
-                if (menuName.equals("뒤로가기")) {
-                    menuPath.pop();
-                    return;
                 }
                 processMenu(menuNo, sortBooks);
 
@@ -74,8 +74,9 @@ public abstract class AbstractSubCommand implements SubCommand{
         System.out.printf("[%s]\n", menuTitle);
         for (int i = 0; i < sortBooks.size(); i++) {
             String bookTitle = sortBooks.get(i).getBookTitle();
-            System.out.printf("%d. %s\n", (i + 1), bookTitle);
+            System.out.printf("%d. %s\n", books.get(i).getBookCode(), bookTitle);
         }
+        System.out.println("9. 뒤로가기");
     }
 
     private List<Book> sortBooks(Stack<String> menuPath, List<Book> books){
