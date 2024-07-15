@@ -10,27 +10,6 @@ import java.util.List;
 import java.util.Stack;
 
 public class dataReader {
-
-//  public List<Book> listReader() {
-//    List<Book> books = new ArrayList<>();
-//
-//    try {
-//      BufferedReader br = new BufferedReader(
-//          new FileReader("/home/kei/git/bitcamp-project3/database/book/books.txt"));
-//      String line;
-//      while ((line = br.readLine()) != null) {
-//        String[] parts = line.split(",");
-//        if (parts.length == 4) {
-//          books.add(new Book(parts[0], parts[1], parts[2], parts[3]));
-//        }
-//      }
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//
-//    return books;
-//  }
-
     private final List<Book> books;
     private static dataReader instance;
 
