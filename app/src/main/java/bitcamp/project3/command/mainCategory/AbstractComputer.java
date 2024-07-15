@@ -16,9 +16,7 @@ public abstract class AbstractComputer implements Command{
 
     @Override
     public void execute(Stack<String> menuPath) {
-
         menuPath.push(menuTitle);
-        mapPrinter.printBox(menuPath);
 
         printMenus();
 

@@ -19,12 +19,14 @@ public abstract class AbstractCommand implements Command{
     }
     @Override
     public void execute(Stack<String> menuPath) {
-        if (!checkGo()) {
+        mapPrinter.printBox(menuPath, menuTitle);
+
+        if (!checkGo(menuPath)) {
             return;
         }
 
         menuPath.push(menuTitle);
-        mapPrinter.printBox(menuPath);
+        mapPrinter.printBox(menuPath, menuTitle);
         this.menuPath = menuPath;
 
         printMenus();
@@ -55,10 +57,12 @@ public abstract class AbstractCommand implements Command{
         }
     }
 
-    private boolean checkGo() {
+    private boolean checkGo(Stack<String> menuPath) {
+        mapPrinter.printBox(menuPath, menuTitle);
         while (true) {
             String toGo = Prompt.input("%s 갈까?", getCheckGo(menuTitle));
             if (toGo.equalsIgnoreCase("n")) {
+                mapPrinter.printBox(menuPath, "로비");
                 return false;
             } else if (toGo.equalsIgnoreCase("y")) {
                 return true;
