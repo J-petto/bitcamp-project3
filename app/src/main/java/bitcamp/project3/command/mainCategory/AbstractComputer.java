@@ -2,32 +2,21 @@ package bitcamp.project3.command.mainCategory;
 
 import bitcamp.project3.PrintMap;
 import bitcamp.project3.util.Prompt;
-import bitcamp.project3.vo.Book;
 
-import java.util.List;
 import java.util.Stack;
 
-public abstract class AbstractCommand implements Command{
-
+public abstract class AbstractComputer implements Command{
     protected String menuTitle;
-    protected Stack<String> menuPath;
 
     PrintMap mapPrinter = new PrintMap();
 
-    public AbstractCommand(String menuTitle){
+    public AbstractComputer(String menuTitle){
         this.menuTitle = menuTitle;
     }
+
     @Override
     public void execute(Stack<String> menuPath) {
-        mapPrinter.printBox(menuPath, menuTitle);
-
-        if (!checkGo(menuPath)) {
-            return;
-        }
-
         menuPath.push(menuTitle);
-        mapPrinter.printBox(menuPath, menuTitle);
-        this.menuPath = menuPath;
 
         printMenus();
 
@@ -56,23 +45,6 @@ public abstract class AbstractCommand implements Command{
             }
         }
     }
-
-    private boolean checkGo(Stack<String> menuPath) {
-        mapPrinter.printBox(menuPath, menuTitle);
-        while (true) {
-            String toGo = Prompt.input("%s 갈까?", getCheckGo(menuTitle));
-            if (toGo.equalsIgnoreCase("n")) {
-                mapPrinter.printBox(menuPath, "로비");
-                return false;
-            } else if (toGo.equalsIgnoreCase("y")) {
-                return true;
-            } else {
-                System.out.println("y와 n 중에 하나만 입력해주세요.");
-            }
-        }
-    }
-
-    abstract protected String getCheckGo(String menuTitle);
 
     private void printMenus() {
         String[] menus = getMenus();
