@@ -3,32 +3,31 @@
  */
 package bitcamp.project3;
 
+import bitcamp.project3.command.Computer;
 import bitcamp.project3.command.mainCategory.Command;
 import bitcamp.project3.util.Login;
 import bitcamp.project3.command.mainCategory.MediaRoom;
 import bitcamp.project3.command.mainCategory.OtherBooks;
 import bitcamp.project3.command.mainCategory.KoreanBooks;
 import bitcamp.project3.util.Prompt;
-import bitcamp.project3.util.dataReader;
 import bitcamp.project3.vo.User;
-import bitcamp.project3.vo.Book;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Stack;
 
 public class App {
-    String[] menus = {"계단", "오른쪽 통로", "왼쪽 통로", "뒤로가기"};
+    String[] menus = {"계단(S)", "오른쪽 통로", "왼쪽 통로", "컴퓨터", "뒤로가기"};
     String[] loginMenus = {"로그인", "회원가입", "비밀번호 찾기", "종료"};
     Stack<String> menuPath = new Stack<>();
     HashMap<String, Command> mainHash = new HashMap<>();
 
-//    PrintMap mapPrinter = new PrintMap();
+    PrintMap mapPrinter = new PrintMap();
 
     public App() {
         mainHash.put("계단", new KoreanBooks("계단"));
         mainHash.put("오른쪽 통로", new OtherBooks("오른쪽 통로"));
         mainHash.put("왼쪽 통로", new MediaRoom("왼쪽 통로"));
+        mainHash.put("컴퓨터", new Computer("컴퓨터"));
     }
 
     public static void main(String[] args) {
@@ -56,7 +55,7 @@ public class App {
 
     void execute(User loginUser) {
         menuPath.push("로비");
-//        mapPrinter.printBox(menuPath);
+        mapPrinter.printBox(menuPath);
         printMenu();
         String command;
         while (true) {
