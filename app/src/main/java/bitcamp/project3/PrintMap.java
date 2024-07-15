@@ -3,15 +3,15 @@ package bitcamp.project3;
 import java.util.Stack;
 
 public class PrintMap {
-    private final int width = 15;
-    private final int height = 10;
+    private final int width = 60;
+    private final int height = 15;
 
     private final String[][] box = new String[width][height];
 
     public void printBox(Stack<String> menuPath) {
         switch (menuPath.getLast()){
             case "로비" : printLobby(); break;
-            case "계단" : printStair(); break;
+            case "계단" : korean(); break;
             case "왼쪽 통로" : printLeft(); break;
             case "오른쪽 통로" : printRight(); break;
         }
@@ -27,42 +27,15 @@ public class PrintMap {
             box[w][1] = "##";
             box[w][2] = stair;
         }
-        printMap(box);
+
+        for(int h = 0; h < height; h++){
+            for(int w = 0; w < width; w++){
+                System.out.print(box[w][h]);
+            }
+            System.out.print("\n");
+        }
     }
-//    private void printLobby() {
-//        printEmpty();
-//
-//        String line = "==============================";
-//        String[] libraryMap = {
-//                "================================",
-//                "│             창문             │",
-//                "│                              │",
-//                "│                              │",
-//                "│                              │",
-//                "│                              │",
-//                "│                              │",
-//                "│                              │",
-//                "│                              │",
-//                "│             계단             │",
-//                "│#왼쪽 통로   컴퓨터     오른쪽 통로│",
-//                "================================"
-//        };
-//    }
-//        char[][] map = {
-//                line.toCharArray(),
-//                "|  [Window]              ^   |".toCharArray(),
-//                "|                     [Floor]|".toCharArray(),
-//                "|                            |".toCharArray(),
-//                "|                            | ".toCharArray(),
-//                "<-[Left]             [Right]->".toCharArray(),
-//                "|                            |".toCharArray(),
-//                "|                            |".toCharArray(),
-//                "|[Computer]  [P]             |".toCharArray(),
-//                line.toCharArray()
-//        };
-//
-//        printMap(libraryMap);
-//    }
+
     private void printStair(){
 
     }
@@ -76,14 +49,14 @@ public class PrintMap {
     }
 
     private void saveMainBox(){
-        for (int h = 0; h < height; h++) {
-            for (int w = 0; w < width; w++) {
-                if (w == 0 || h == height - 1) {
-                    box[w][h] = "==";
+        for (int w = 0; w < height; w++) {
+            for (int h = 0; h < width; h++) {
+                if (w == 0 || w == height - 1) {
+                    box[h][w] = "==";
                 } else if (h == 0 || h == width - 1) {
-                    box[w][h] = "|";
+                    box[h][w] = "||";
                 } else {
-                    box[w][h] = "  ";
+                    box[h][w] = "  ";
                 }
             }
         }
@@ -103,5 +76,29 @@ public class PrintMap {
             System.out.println();
         }
     }
+
+    public static void korean() {
+        System.out.println("╔════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║          ╔═════════╗        ╔═════════════════════════════════════╗        ║");
+        System.out.println("║          ║ 🪟  🪟 ║        ║                        Study zone   ║        ║");
+        System.out.println("║          ╚═════════╝        ║                                     ║        ║");
+        System.out.println("║                             ╚═════════════════════════════════════╝        ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║        ╔═══════════════╗                            ╔═══════════════╗      ║");
+        System.out.println("║        ║  📚  📚  📚  ║                            ║  📚  📚  📚 ║      ║");
+        System.out.println("║        ╚═══════════════╝                            ╚═══════════════╝      ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║        ╔═══════════════╗                             ╔═══════════════╗     ║");
+        System.out.println("║        ║  📚  📚  📚  ║                             ║  📚  📚  📚  ║    ║");
+        System.out.println("║        ╚═══════════════╝                             ╚═══════════════╝     ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("║                                                                            ║");
+        System.out.println("╚════════════════════════════════════════════════════════════════════════════╝");
+    }
+
 
 }
