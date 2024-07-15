@@ -3,12 +3,14 @@ package bitcamp.project3.command.subCategory;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.dataReader;
 import bitcamp.project3.vo.Book;
+import bitcamp.project3.vo.TakeOutManager;
 
 import java.util.List;
 
 public class Humanities extends AbstractSubCommand {
     dataReader reader = dataReader.getInstance();
     public List<Book> books = reader.getBooks();
+    TakeOutManager takeOut = new TakeOutManager();
 
     protected String menuTitle;
 
@@ -29,6 +31,7 @@ public class Humanities extends AbstractSubCommand {
             if (command.equalsIgnoreCase("y")) {
                 if (!book.isLoneBook()) {
                     book.setLoneBook(true);
+
                     System.out.println("대여했습니다.");
                     break;
                 }
