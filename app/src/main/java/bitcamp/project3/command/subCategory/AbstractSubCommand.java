@@ -38,9 +38,9 @@ public abstract class AbstractSubCommand implements SubCommand{
                 printMenus(menuPath);
                 continue;
             }
-            if (command.equals("9")) {
+            if (command.equals("0")) {
                 menuPath.pop();
-                return;
+                break;
             }
 
             try {
@@ -82,7 +82,7 @@ public abstract class AbstractSubCommand implements SubCommand{
             String bookTitle = sortBooks.get(i).getBookTitle();
             System.out.printf("%d. %s\n", books.get(i).getBookCode(), bookTitle);
         }
-        System.out.println("9. 뒤로가기");
+        System.out.println("0. 뒤로가기");
     }
 
     private List<Book> sortBooks(Stack<String> menuPath, List<Book> books){
@@ -92,7 +92,7 @@ public abstract class AbstractSubCommand implements SubCommand{
         mainPath = switch (mainPath) {
             case "계단" -> "국내서적";
             case "오른쪽 통로" -> "외국서적";
-            case "왼쪽 통호" -> "미디어";
+            case "왼쪽 통로" -> "미디어";
             default -> mainPath;
         };
         String subPath = menuPath.get(2);

@@ -7,14 +7,13 @@ import bitcamp.project3.command.mainCategory.MediaRoom;
 import bitcamp.project3.command.mainCategory.OtherBooks;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
-import com.sun.tools.javac.Main;
 
 import java.util.HashMap;
 import java.util.Stack;
 
 public class MainMenu {
 
-    String[] menus = {"계단", "오른쪽 통로", "왼쪽 통로", "컴퓨터", "뒤로가기"};
+    String[] menus = {"계단", "오른쪽 통로", "왼쪽 통로", "컴퓨터"};
 
     Stack<String> menuPath = new Stack<>();
     HashMap<String, Command> mainHash = new HashMap<>();
@@ -39,14 +38,15 @@ public class MainMenu {
                 printMenu();
                 continue;
             }
+            if(command.equals("0")){
+                break;
+            }
             try {
                 int menuNo = Integer.parseInt(command);
                 String menuTitle = getMenuTitle(menuNo);
                 if (menuTitle == null) {
                     System.out.println("유효한 메뉴가 아닙니다.");
-                } else if (menuTitle.equals("뒤로가기")) {
-                    break;
-                } else {
+                }else {
                     processMenu(menuTitle, loginUser);
                 }
             }catch (NumberFormatException e){
@@ -79,6 +79,7 @@ public class MainMenu {
         for (String menu : menus) {
             System.out.printf("%s. %s\n", count++, menu);
         }
+        System.out.println("0. 뒤로가기");
     }
 
     private String getMenuPathTitle(Stack<String> menuPath) {

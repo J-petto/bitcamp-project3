@@ -10,12 +10,14 @@ import java.util.List;
 import java.util.Stack;
 
 public class MediaRoom extends AbstractCommand {
-    String[] menus = {"한국영화", "외국영화", "뒤로가기"};
+    String[] menus = {"한국영화", "외국영화"};
 
     HashMap<String, SubCommand> subHash = new HashMap<>();
 
     public MediaRoom(String menuTitle) {
         super(menuTitle);
+        subHash.put("한국영화", new Humanities("한국영화"));
+        subHash.put("외국영화", new Humanities("외국영화"));
     }
 
     @Override
@@ -25,7 +27,12 @@ public class MediaRoom extends AbstractCommand {
 
     @Override
     protected void processMenu(String menuName, User user) {
-
+        SubCommand command = subHash.get(menuName);
+        if(command == null){
+            System.out.println("해당 메뉴의 명령을 처리할 수 없습니다.");
+            return;
+        }
+        command.execute(menuPath, user);
     }
 
     @Override

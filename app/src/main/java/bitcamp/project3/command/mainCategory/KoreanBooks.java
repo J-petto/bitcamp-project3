@@ -7,7 +7,7 @@ import bitcamp.project3.vo.User;
 import java.util.HashMap;
 
 public class KoreanBooks extends AbstractCommand {
-    String[] menus = {"인문학", "자기계발", "경제", "과학", "뒤로가기"};
+    String[] menus = {"인문학", "자기계발", "경제", "과학"};
 
     HashMap<String, SubCommand> subHash = new HashMap<>();
     public KoreanBooks(String menuTitle) {

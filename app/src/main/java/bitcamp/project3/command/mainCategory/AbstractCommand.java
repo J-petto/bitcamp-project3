@@ -8,16 +8,17 @@ import bitcamp.project3.vo.User;
 import java.util.List;
 import java.util.Stack;
 
-public abstract class AbstractCommand implements Command{
+public abstract class AbstractCommand implements Command {
 
     protected String menuTitle;
     protected Stack<String> menuPath;
 
     PrintMap mapPrinter = new PrintMap();
 
-    public AbstractCommand(String menuTitle){
+    public AbstractCommand(String menuTitle) {
         this.menuTitle = menuTitle;
     }
+
     @Override
     public void execute(Stack<String> menuPath, User user) {
         mapPrinter.printBox(menuPath, menuTitle);
@@ -38,6 +39,11 @@ public abstract class AbstractCommand implements Command{
                 printMenus();
                 continue;
             }
+            if (command.equals("0")) {
+                menuPath.pop();
+                mapPrinter.printBox(menuPath, menuTitle);
+                break;
+            }
 
             try {
                 int menuNo = Integer.parseInt(command);
@@ -45,10 +51,6 @@ public abstract class AbstractCommand implements Command{
                 if (menuName == null) {
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
                     continue;
-                }
-                if (menuName.equals("뒤로가기")) {
-                    menuPath.pop();
-                    return;
                 }
                 processMenu(menuName, user);
 
@@ -77,10 +79,17 @@ public abstract class AbstractCommand implements Command{
 
     private void printMenus() {
         String[] menus = getMenus();
-        System.out.printf("[%s]\n", menuTitle);
+        String title = switch (menuTitle) {
+            case "계단" -> "국내도서";
+            case "오른쪽 통로" -> "해외도서";
+            case "왼쪽 통로" -> "미디어";
+            default -> "";
+        };
+        System.out.printf("[%s]\n", title);
         for (int i = 0; i < menus.length; i++) {
             System.out.printf("%d. %s\n", (i + 1), menus[i]);
         }
+        System.out.println("0. 뒤로가기");
     }
 
     private String getMenuTitle(int menuNo) {

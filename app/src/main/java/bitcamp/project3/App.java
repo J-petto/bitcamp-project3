@@ -42,7 +42,6 @@ public class App {
                 User user = Login.loginUser();
                 if (!(user == null)) {
                     mainMenu.execute(user);
-                    break;
                 } else {
                     System.out.println("횟수 초가 - 초기화면으로 돌아갑니다.");
                     break;

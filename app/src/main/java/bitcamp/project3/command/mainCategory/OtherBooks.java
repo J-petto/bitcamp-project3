@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class OtherBooks extends AbstractCommand {
-    String[] menus = {"인문학", "자기계발", "경제", "과학", "뒤로가기"};
+    String[] menus = {"인문학", "자기계발", "경제", "과학"};
 
     HashMap<String, SubCommand> subHash = new HashMap<>();
 
