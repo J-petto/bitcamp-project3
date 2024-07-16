@@ -28,7 +28,6 @@ public class Computer extends AbstractComputer {
       case "책 조회":
         bookCheck(user.getUserID());
         break;
-
       case "책 반납":
         bookReturn();
         break;
@@ -37,21 +36,21 @@ public class Computer extends AbstractComputer {
   }
 
   private void loadBooks() {
-      this.userTakes = test.loadTakes();
+    this.userTakes = test.loadTakes();
   }
 
   private void bookCheck(String userID) {
     System.out.println("책 조회입니다.");
     loadBooks();
-      if (userTakes.containsKey(userID)) {
-          List<TakeOutRecord> values = userTakes.get(userID);
-          for (TakeOutRecord value : values) {
-              System.out.println(value.getTakesOutBook().getBookTitle());
-              System.out.println(value.getTakesOutDate());
-          }
-      } else {
-          System.out.println("지정된 키가 맵에 없습니다.");
+    if (userTakes.containsKey(userID)) {
+      List<TakeOutRecord> values = userTakes.get(userID);
+      for (TakeOutRecord value : values) {
+        System.out.println(value.getTakesOutBook().getBookTitle());
+        System.out.println(value.getTakesOutDate());
       }
+    } else {
+      System.out.println("지정된 키가 맵에 없습니다.");
+    }
   }
 
   private void bookReturn() {
