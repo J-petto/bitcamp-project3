@@ -6,10 +6,11 @@ import bitcamp.project3.BookCode.subCategory;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
   private static int seqBookId;
   private int bookCode;
   private String bookTitle;

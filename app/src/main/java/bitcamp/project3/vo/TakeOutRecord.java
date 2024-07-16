@@ -2,9 +2,10 @@ package bitcamp.project3.vo;
 
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class TakeOutRecord {
+public class TakeOutRecord implements Serializable {
   private Book takesOutBook;
   private LocalDate takesOutDate;
 

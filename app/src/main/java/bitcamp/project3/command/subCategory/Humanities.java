@@ -11,7 +11,7 @@ import java.util.List;
 public class Humanities extends AbstractSubCommand {
     dataReader reader = dataReader.getInstance();
     public List<Book> books = reader.getBooks();
-    TakeOutManager takeOut = new TakeOutManager();
+    TakeOutManager test = new TakeOutManager();
 
     protected String menuTitle;
 
@@ -32,6 +32,7 @@ public class Humanities extends AbstractSubCommand {
             if (command.equalsIgnoreCase("y")) {
                 if (!book.isLoneBook()) {
                     book.setLoneBook(1);
+                    test.takeOut(user, book);
                     System.out.println("대여했습니다.");
                     break;
                 }

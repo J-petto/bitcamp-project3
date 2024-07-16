@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TakeOutManager {
+public class TakeOutManager implements Serializable {
   private final int MAX_LIMIT = 3;
   private Map<String, List<TakeOutRecord>> userTakes;
 
@@ -25,15 +25,15 @@ public class TakeOutManager {
     }
   }
 
-  private void loadTakes(String userID) {
+  public Map<String, List<TakeOutRecord>> loadTakes() {
     String userHome = System.getProperty("user.home");
     String filePath = userHome + "/git/bitcamp-project3/database/takeout_manager.dat";
     try (FileInputStream fis = new FileInputStream(filePath);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
-      this.userTakes = (Map<String, List<TakeOutRecord>>) ois.readObject();
+      return (Map<String, List<TakeOutRecord>>) ois.readObject();
     } catch (IOException | ClassNotFoundException e) {
       System.out.println("데이터 로딩에 실패했다는 사실~");
-      this.userTakes=new HashMap<>();
+      return new HashMap<>();
     }
   }
 

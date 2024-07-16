@@ -39,7 +39,7 @@ public abstract class AbstractComputer implements Command{
                     menuPath.pop();
                     return;
                 }
-                processMenu(menuName);
+                processMenu(menuName, user);
 
             } catch (NumberFormatException ex) {
                 System.out.println("숫자로 메뉴 번호를 입력하세요.");
@@ -78,5 +78,5 @@ public abstract class AbstractComputer implements Command{
 
     protected abstract String[] getMenus();
 
-    protected abstract void processMenu(String menuName);
+    protected abstract void processMenu(String menuName, User user);
 }
