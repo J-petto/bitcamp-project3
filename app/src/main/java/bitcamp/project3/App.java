@@ -42,6 +42,7 @@ public class App {
                 User user = Login.loginUser();
                 if (!(user == null)) {
                     mainMenu.execute(user);
+                    break;
                 } else {
                     System.out.println("횟수 초가 - 초기화면으로 돌아갑니다.");
                     break;
@@ -69,14 +70,6 @@ public class App {
     String getloginMenuTitle(int menuNo, String[] loginMenus) {
         return isvalidatemenu(menuNo, loginMenus) ? loginMenus[menuNo - 1] : null;
     }
-
-    //  private String getMenuTitle(int menuNo) {
-    //    return isValidateMenu(menuNo) ? menus[menuNo - 1] : null;
-    //  }
-
-    //  private boolean isValidateMenu(int menuNo) {
-    //    return menuNo >= 1 && menuNo <= menus.length;
-    //  }
 
     private void printLoginMenu() {
         int count = 1;
