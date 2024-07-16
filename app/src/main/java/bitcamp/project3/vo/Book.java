@@ -8,7 +8,7 @@ public class Book implements Serializable {
   private String bookTitle;
   private String bookAuthor;
   //  private String[] bookContents;
-  private boolean loneBook;
+//  private boolean loneBook;
   //    List<User>
   private String mainCategory;
   private String subCategory;
@@ -22,7 +22,7 @@ public class Book implements Serializable {
     subCategory = sub;
     this.bookTitle = bookTitle;
     this.bookAuthor = bookAuthor;
-    loneBook = check == 1;
+//    loneBook = check == 1;
   }
 
   public static int getSeqBookId() {
@@ -84,13 +84,13 @@ public class Book implements Serializable {
 //    this.bookContents = bookContents;
 //  }
 
-  public boolean isLoneBook() {
-    return loneBook;
-  }
+//  public boolean isLoneBook() {
+//    return loneBook;
+//  }
 
-  public void setLoneBook(int check) {
-    this.loneBook = check == 1;
-  }
+//  public void setLoneBook(int check) {
+//    this.loneBook = check == 1;
+//  }
 
   public String getBookAuthor() {
     return bookAuthor;

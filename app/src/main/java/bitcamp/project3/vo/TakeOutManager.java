@@ -12,7 +12,7 @@ public class TakeOutManager implements Serializable {
 
   public TakeOutManager() {
     this.userTakes=new HashMap<>();
-  }
+  };
 
   private void saveTakes() {
     String userHome = System.getProperty("user.home");

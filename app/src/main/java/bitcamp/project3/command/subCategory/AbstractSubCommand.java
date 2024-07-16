@@ -42,7 +42,6 @@ public abstract class AbstractSubCommand implements SubCommand{
                 menuPath.pop();
                 break;
             }
-
             try {
                 int menuNo = Integer.parseInt(command);
                 String menuName = getMenuTitle(menuNo);
