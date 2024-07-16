@@ -90,14 +90,6 @@ public class App {
         return isvalidatemenu(menuNo, loginMenus) ? loginMenus[menuNo - 1] : null;
     }
 
-    //  private String getMenuTitle(int menuNo) {
-    //    return isValidateMenu(menuNo) ? menus[menuNo - 1] : null;
-    //  }
-
-    //  private boolean isValidateMenu(int menuNo) {
-    //    return menuNo >= 1 && menuNo <= menus.length;
-    //  }
-
     private void printLoginMenu() {
         int count = 1;
         for (String menu : loginMenus) {
