@@ -3,6 +3,7 @@ package bitcamp.project3.command.mainCategory;
 import bitcamp.project3.PrintMap;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
+import bitcamp.project3.vo.User;
 
 import java.util.List;
 import java.util.Stack;
@@ -18,7 +19,7 @@ public abstract class AbstractCommand implements Command{
         this.menuTitle = menuTitle;
     }
     @Override
-    public void execute(Stack<String> menuPath) {
+    public void execute(Stack<String> menuPath, User user) {
         mapPrinter.printBox(menuPath, menuTitle);
 
         if (!checkGo(menuPath)) {
@@ -49,7 +50,7 @@ public abstract class AbstractCommand implements Command{
                     menuPath.pop();
                     return;
                 }
-                processMenu(menuName);
+                processMenu(menuName, user);
 
             } catch (NumberFormatException ex) {
                 System.out.println("숫자로 메뉴 번호를 입력하세요.");
@@ -105,5 +106,5 @@ public abstract class AbstractCommand implements Command{
 
     protected abstract String[] getMenus();
 
-    protected abstract void processMenu(String menuName);
+    protected abstract void processMenu(String menuName, User user);
 }

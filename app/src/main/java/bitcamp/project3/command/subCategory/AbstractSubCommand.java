@@ -1,7 +1,9 @@
 package bitcamp.project3.command.subCategory;
 
+import bitcamp.project3.PrintMap;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.Book;
+import bitcamp.project3.vo.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +15,20 @@ public abstract class AbstractSubCommand implements SubCommand{
     private List<Book> sortBooks;
     protected Stack<String> menuPath;
 
+    PrintMap mapPrinter = new PrintMap();
+
     public AbstractSubCommand(String menuTitle){
         this.menuTitle = menuTitle;
     }
 
     @Override
-    public void execute(Stack<String> menuPath) {
+    public void execute(Stack<String> menuPath, User user) {
         if (!checkGo()) {
             return;
         }
 
         menuPath.push(menuTitle);
+        mapPrinter.printBox(menuPath, menuTitle);
         this.menuPath = menuPath;
         printMenus(menuPath);
 
@@ -45,7 +50,7 @@ public abstract class AbstractSubCommand implements SubCommand{
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
                     continue;
                 }
-                processMenu(menuNo, sortBooks);
+                processMenu(menuNo, sortBooks, user);
 
             } catch (NumberFormatException ex) {
                 System.out.println("숫자로 메뉴 번호를 입력하세요.");
@@ -123,7 +128,7 @@ public abstract class AbstractSubCommand implements SubCommand{
         return strBuilder.toString();
     }
 
-   abstract protected void processMenu(int bookNo, List<Book> books);
+   abstract protected void processMenu(int bookNo, List<Book> books, User user);
 
    abstract protected List<Book> getMenus();
 }

@@ -23,13 +23,13 @@ public class Book {
   public Book() {
   }
 
-
-  public Book(String main, String sub, String bookTitle, String bookAuthor) {
+  public Book(String main, String sub, String bookTitle, String bookAuthor, int check) {
     setBookCode();
     mainCategory = main;
     subCategory = sub;
     this.bookTitle = bookTitle;
     this.bookAuthor = bookAuthor;
+    loneBook = check == 1;
   }
 
   public static int getSeqBookId() {
@@ -95,8 +95,8 @@ public class Book {
     return loneBook;
   }
 
-  public void setLoneBook(boolean loneBook) {
-    this.loneBook = loneBook;
+  public void setLoneBook(int check) {
+    this.loneBook = check == 1;
   }
 
   public String getBookAuthor() {

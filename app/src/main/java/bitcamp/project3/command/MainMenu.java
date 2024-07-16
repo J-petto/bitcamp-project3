@@ -39,25 +39,30 @@ public class MainMenu {
                 printMenu();
                 continue;
             }
-            int menuNo = Integer.parseInt(command);
-            String menuTitle = getMenuTitle(menuNo);
-            if (menuTitle == null) {
-                System.out.println("유효한 메뉴가 아닙니다.");
-            } else if (menuTitle.equals("뒤로가기")) {
-                break;
-            } else {
-                processMenu(menuTitle);
+            try {
+                int menuNo = Integer.parseInt(command);
+                String menuTitle = getMenuTitle(menuNo);
+                if (menuTitle == null) {
+                    System.out.println("유효한 메뉴가 아닙니다.");
+                } else if (menuTitle.equals("뒤로가기")) {
+                    break;
+                } else {
+                    processMenu(menuTitle, loginUser);
+                }
+            }catch (NumberFormatException e){
+                System.out.println("메뉴는 번호로 입력해주세요.");
             }
+
         }
     }
 
-    private void processMenu(String menuTitle) {
+    private void processMenu(String menuTitle, User user) {
         Command command = mainHash.get(menuTitle);
         if (command == null) {
             System.out.println("해당 메뉴의 명령을 처리할 수 없습니다.");
             return;
         }
-        command.execute(menuPath);
+        command.execute(menuPath, user);
     }
 
     boolean isValidateMainMenu(int menuNo) {

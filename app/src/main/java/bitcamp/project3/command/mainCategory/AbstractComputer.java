@@ -2,6 +2,7 @@ package bitcamp.project3.command.mainCategory;
 
 import bitcamp.project3.PrintMap;
 import bitcamp.project3.util.Prompt;
+import bitcamp.project3.vo.User;
 
 import java.util.Stack;
 
@@ -15,7 +16,7 @@ public abstract class AbstractComputer implements Command{
     }
 
     @Override
-    public void execute(Stack<String> menuPath) {
+    public void execute(Stack<String> menuPath, User user) {
         menuPath.push(menuTitle);
 
         printMenus();

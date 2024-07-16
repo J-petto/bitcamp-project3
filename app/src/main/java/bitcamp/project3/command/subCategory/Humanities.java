@@ -4,6 +4,7 @@ import bitcamp.project3.util.Prompt;
 import bitcamp.project3.util.dataReader;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.TakeOutManager;
+import bitcamp.project3.vo.User;
 
 import java.util.List;
 
@@ -24,14 +25,13 @@ public class Humanities extends AbstractSubCommand {
     }
 
     @Override
-    protected void processMenu(int bookNo, List<Book> sortBooks) {
+    protected void processMenu(int bookNo, List<Book> sortBooks, User user) {
         Book book = sortBooks.get(bookNo - 1);
         while (true) {
             String command = Prompt.input("%s를 대여하시겠습니까?", book.getBookTitle());
             if (command.equalsIgnoreCase("y")) {
                 if (!book.isLoneBook()) {
-                    book.setLoneBook(true);
-
+                    book.setLoneBook(1);
                     System.out.println("대여했습니다.");
                     break;
                 }

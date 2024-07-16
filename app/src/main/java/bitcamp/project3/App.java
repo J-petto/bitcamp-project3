@@ -3,19 +3,10 @@
  */
 package bitcamp.project3;
 
-import bitcamp.project3.command.Computer;
 import bitcamp.project3.command.MainMenu;
-import bitcamp.project3.command.mainCategory.Command;
 import bitcamp.project3.util.Login;
-import bitcamp.project3.command.mainCategory.MediaRoom;
-import bitcamp.project3.command.mainCategory.OtherBooks;
-import bitcamp.project3.command.mainCategory.KoreanBooks;
 import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
-import org.checkerframework.checker.units.qual.N;
-
-import java.util.HashMap;
-import java.util.Stack;
 
 public class App {
     String[] loginMenus = {"로그인", "회원가입", "비밀번호 찾기", "종료"};
@@ -29,7 +20,7 @@ public class App {
         System.out.println("[로그인]");
         while (true) {
             printLoginMenu();
-            String command = Prompt.input("> ");
+            String command = Prompt.input(">");
             try {
                 int menuNo = Integer.parseInt(command);
                 String menuTitle = getloginMenuTitle(menuNo, loginMenus);

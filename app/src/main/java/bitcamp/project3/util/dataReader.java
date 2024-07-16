@@ -34,8 +34,8 @@ public class dataReader {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length == 4) {
-                    books.add(new Book(parts[0], parts[1], parts[2], parts[3]));
+                if (parts.length == 5) {
+                    books.add(new Book(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4])));
                 }
             }
         } catch (IOException e) {
