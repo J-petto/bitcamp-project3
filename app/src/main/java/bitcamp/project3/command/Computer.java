@@ -52,7 +52,7 @@ public class Computer extends AbstractComputer {
 //            }
             printBookCheck(values);
         } else {
-            System.out.println("지정된 키가 맵에 없습니다.");
+            System.out.println("대출한 책이 없습니다.");
         }
     }
 

@@ -27,8 +27,28 @@ public class App {
                 if (menuTitle == null) {
                     System.out.println("유효한 메뉴가 아닙니다.");
                 } else {
-                    processLogin(menuTitle);
-                    break;
+                    switch (menuTitle) {
+                        case "로그인":
+                            User user = Login.loginUser();
+                            if (!(user == null)) {
+                                mainMenu.execute(user);
+                            } else {
+                                System.out.println("횟수 초과 - 초기화면으로 돌아갑니다.");
+                            }
+                            break;
+                        case "회원가입":
+                            Login.authUser();
+                            break;
+                        case "비밀번호 찾기":
+                            Login.reSetUserPassword();
+                            break;
+                        case "종료":
+                            System.out.println("시스템을 종료합니다.");
+                            System.exit(0);
+                        default:
+                            System.out.println("없는 메뉴입니다.");
+                            break;
+                    }
                 }
             } catch (NumberFormatException ex) {
                 System.out.println("숫자로 메뉴 번호를 입력하세요.");
@@ -36,30 +56,30 @@ public class App {
         }
     }
 
-    private void processLogin(String menuTitle) {
-        switch (menuTitle) {
-            case "로그인":
-                User user = Login.loginUser();
-                if (!(user == null)) {
-                    mainMenu.execute(user);
-                } else {
-                    System.out.println("횟수 초가 - 초기화면으로 돌아갑니다.");
-                    break;
-                }
-            case "회원가입":
-                Login.authUser();
-                break;
-            case "비밀번호 분실":
-                Login.reSetUserPassword();
-                break;
-            case "종료":
-                System.out.println("시스템을 종료합니다.");
-                System.exit(0);
-            default:
-                System.out.println("없는 메뉴입니다.");
-                break;
-        }
-    }
+//    private void processLogin(String menuTitle) {
+//        switch (menuTitle) {
+//            case "로그인":
+//                User user = Login.loginUser();
+//                if (!(user == null)) {
+//                    mainMenu.execute(user);
+//                } else {
+//                    System.out.println("횟수 초가 - 초기화면으로 돌아갑니다.");
+//                    break;
+//                }
+//            case "회원가입":
+//                Login.authUser();
+//                break;
+//            case "비밀번호 분실":
+//                Login.reSetUserPassword();
+//                break;
+//            case "종료":
+//                System.out.println("시스템을 종료합니다.");
+//                System.exit(0);
+//            default:
+//                System.out.println("없는 메뉴입니다.");
+//                break;
+//        }
+//    }
 
     boolean isvalidatemenu(int menuNo, String[] loginMenus) {
 

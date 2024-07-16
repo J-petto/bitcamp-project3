@@ -22,6 +22,7 @@ public class Login {
           count++;
         } else if (!(user.getUserPassword().equals(userPassword))) {
           System.out.println("유효하지 않은 비밀번호 입니다.");
+          count++;
         } else {
           System.out.println("로그인 성공 !");
           System.out.printf("%s님 접속하셨습니다.\n", user.getUserName());
