@@ -63,16 +63,22 @@ public class Computer extends AbstractComputer {
   private void bookCheck() {
     takenBooks = takeOutList.takeOutReader();
     String search = Prompt.input("찾으시는 도서의 이름을 입력해주세요! ");
+    boolean found = false;
     for (Book book : books) {
       if (book.getBookTitle().equals(search)) {
         System.out.printf("해당 도서는 %s의 %s에 배치되어 있습니다.\n", book.getMainCategory(),
             book.getSubCategory());
+        found=true;
         if (!(takenBooks.contains(book.getBookTitle()))) {
           System.out.println("대출 가능한 도서 입니다.");
         } else {
           System.out.println("대출 중인 도서 입니다.");
         }
       }
+    }
+
+    if(!found) {
+      System.out.println("해당 도서를 찾을 수 없습니다.");
     }
   }
 
