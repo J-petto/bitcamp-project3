@@ -44,7 +44,6 @@ public class TakeOutCommand extends AbstractSubCommand {
           break;
         } else {
           System.out.println("대출 중인 도서입니다.");
-          System.out.println("책을 제자리에 돌려놨습니다.");
           break;
         }
       } else if (command.equalsIgnoreCase("n")) {
