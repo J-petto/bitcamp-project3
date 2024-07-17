@@ -1,13 +1,10 @@
 package bitcamp.project3.command.mainCategory;
 
-import bitcamp.project3.command.subCategory.Humanities;
+import bitcamp.project3.command.subCategory.TakeOutCommand;
 import bitcamp.project3.command.subCategory.SubCommand;
-import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
 
 public class MediaRoom extends AbstractCommand {
     String[] menus = {"한국영화", "외국영화"};
@@ -16,8 +13,8 @@ public class MediaRoom extends AbstractCommand {
 
     public MediaRoom(String menuTitle) {
         super(menuTitle);
-        subHash.put("한국영화", new Humanities("한국영화"));
-        subHash.put("외국영화", new Humanities("외국영화"));
+        subHash.put("한국영화", new TakeOutCommand("한국영화"));
+        subHash.put("외국영화", new TakeOutCommand("외국영화"));
     }
 
     @Override

@@ -1,13 +1,10 @@
 package bitcamp.project3.command.mainCategory;
 
-import bitcamp.project3.command.subCategory.Humanities;
+import bitcamp.project3.command.subCategory.TakeOutCommand;
 import bitcamp.project3.command.subCategory.SubCommand;
-import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.User;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
 
 public class OtherBooks extends AbstractCommand {
     String[] menus = {"인문학", "자기계발", "경제", "과학"};
@@ -16,10 +13,10 @@ public class OtherBooks extends AbstractCommand {
 
     public OtherBooks(String menuTitle) {
         super(menuTitle);
-        subHash.put("인문학", new Humanities("인문학"));
-        subHash.put("자기계발", new Humanities("자기계발"));
-        subHash.put("경제", new Humanities("경제"));
-        subHash.put("과학", new Humanities("과학"));
+        subHash.put("인문학", new TakeOutCommand("인문학"));
+        subHash.put("자기계발", new TakeOutCommand("자기계발"));
+        subHash.put("경제", new TakeOutCommand("경제"));
+        subHash.put("과학", new TakeOutCommand("과학"));
     }
 
     @Override

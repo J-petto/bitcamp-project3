@@ -7,22 +7,18 @@ public class Book implements Serializable {
   private int bookCode;
   private String bookTitle;
   private String bookAuthor;
-  //  private String[] bookContents;
-//  private boolean loneBook;
-  //    List<User>
   private String mainCategory;
   private String subCategory;
 
   public Book() {
   }
 
-  public Book(String main, String sub, String bookTitle, String bookAuthor, int check) {
+  public Book(String main, String sub, String bookTitle, String bookAuthor) {
     setBookCode();
     mainCategory = main;
     subCategory = sub;
     this.bookTitle = bookTitle;
     this.bookAuthor = bookAuthor;
-//    loneBook = check == 1;
   }
 
   public static int getSeqBookId() {
