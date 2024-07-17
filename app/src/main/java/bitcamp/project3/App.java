@@ -9,15 +9,45 @@ import bitcamp.project3.util.Prompt;
 import bitcamp.project3.vo.User;
 
 public class App {
-    String[] loginMenus = {"로그인", "회원가입", "비밀번호 찾기", "종료"};
+    String[] loginMenus = {"로그인", "회원가입", "재설정", "종료"};
     MainMenu mainMenu = new MainMenu();
 
     public static void main(String[] args) {
         new App().init();
     }
 
+    private void loginImg(){
+        System.out.print("\n" +
+                "⣳⣳⡳⡵⣯⣳⣝⣗⣗⡯⣗⢇⡏⣖⡇⡳⣝⡺⡜⡮⡺⣪⢮⡫⡮⡳⣕⢯⡳⡕⣗⢝⢮⡣⣗⢵⢳⡹⣕⣽⣱⣳⣕⣮⡳⡵⡝⣎⣗⣝⢮⡳⣝⢮⡳⣝⢮⢯⡳⡽\n" +
+                "⣵⡳⡽⡽⣺⣺⡺⣺⣺⣺⡣⡇⡗⣕⡧⢱⡣⣳⢹⡪⣫⡺⣪⢮⡫⣞⢮⢳⢕⢯⢎⣏⢧⣳⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣶⣕⢗⣝⢮⡳⣝⢮⢯⡺⡮⣫\n" +
+                "⡺⡹⡝⣝⡓⡗⣝⢭⢝⡲⣱⢹⢜⢎⡧⡑⡯⡪⡧⣫⡺⣚⢮⡣⡯⡺⣪⡳⣝⡕⣗⢵⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣧⡳⡝⣎⢗⣗⣝⢮⡳\n" +
+                "⣣⢳⡹⡔⡽⡸⡜⡼⣜⠼⡜⡮⣪⢳⠱⣸⢝⢵⡹⡪⡮⡳⡣⡯⢮⣫⡺⣜⢮⢺⣪⠣⠨⣢⣶⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⡳⡝⣖⢵⡫⣞\n" +
+                "⡴⣳⢽⢽⣫⣟⢿⢽⢽⣻⣫⢿⢽⣻⣻⢽⣻⣳⣝⢮⡳⡝⣝⢮⢳⡱⣕⢧⢳⡣⣯⣼⣿⣿⣿⡿⡟⢍⠢⠡⡉⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⢏⡮⡳⣝⢞\n" +
+                "⣯⣯⣯⣻⣺⣺⣽⣽⢽⡺⡺⠽⠽⢞⠾⠽⢞⠷⡯⡷⢵⢝⢮⢮⡳⠽⢜⠮⠧⡳⡵⡿⡛⡝⢅⠢⠩⡢⡅⢕⠨⡘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣗⣝⢽⢜⡵\n" +
+                "⢀⢂⢐⠠⢂⢂⢐⠠⠂⠔⠨⢈⠔⡐⠨⢐⠐⡐⠠⢂⠂⡂⢂⠂⠔⠡⢂⢌⠤⢝⢚⠰⡐⡅⠕⢌⢊⠢⡑⢅⢑⠌⡺⣿⣿⠟⠟⢿⣿⣿⣿⣿⣿⣿⣿⡷⡕⣗⡳⣝\n" +
+                "⣀⣢⠴⡬⡴⣔⣴⢾⢾⢾⡽⣕⡆⡂⠅⡂⠌⡐⡁⠢⠨⠠⢁⠊⠌⡨⢰⠣⠡⡑⡐⢅⠢⣹⢌⠢⠢⡑⢌⢂⢆⢑⢌⡻⠡⡡⡑⢅⢙⣿⣿⣿⣿⣿⣿⢯⡺⣪⡺⣜\n" +
+                "⡷⣗⣟⣯⡿⣯⢿⢝⣟⠽⠽⠕⡓⠠⢁⠂⠅⡂⠂⠅⡊⠌⡐⠨⢐⠠⡇⡅⢕⠨⠨⡂⢕⠨⡃⢅⠕⢌⢂⢆⠢⡑⢄⠅⢕⢐⠌⡂⡂⣿⣿⣿⣿⣿⣟⣕⢧⢳⢕⢇\n" +
+                "⠨⠩⢉⠍⡨⢐⠐⡐⢐⠨⢐⠡⡆⢃⠒⠑⠑⠒⠑⠑⠒⠑⢒⠑⠒⠒⢗⠨⡂⢅⢕⠨⡂⢕⠨⠢⡑⢔⢑⠄⢕⠨⠢⠡⡑⣐⣑⣌⣶⣿⣿⣿⢿⢋⢐⢀⠻⠼⣕⢽\n" +
+                "⠠⡁⡂⡂⡂⠅⢌⢐⢐⠨⢐⠐⢹⢢⠀⡁⠸⡀⡁⠑⡇⢱⢱⢌⢞⡇⢨⢮⣈⢂⠢⡑⢌⠢⠡⡑⢌⢂⠢⡡⢡⠡⠣⣑⢌⣌⣻⡿⡿⣟⡯⡷⡐⡀⡂⡐⠠⢁⠑⢯\n" +
+                "⡐⢐⢐⠠⠂⠅⡂⢂⠂⢌⢐⠨⢐⠹⣢⠀⠂⢱⠀⠂⠹⡆⠹⢎⡿⡵⢯⢯⢾⢽⡺⣲⢵⡭⡮⣖⡵⣖⣗⣞⢮⣻⣻⢵⡻⣮⡳⡽⡽⡵⣫⢯⢗⡀⡂⠄⠅⢊⠳⡈\n" +
+                "⢈⠔⡐⠨⡈⡂⠌⡐⠨⢐⢀⢊⠐⠄⢣⠃⢈⡀⡡⣈⠠⠈⢨⠣⣛⣌⠬⠳⠛⡣⠩⠉⠔⡠⢙⢷⢽⢵⡳⡽⡵⣳⢯⣳⣻⡪⡯⡯⣫⢯⣫⢯⢯⠂⠄⠅⠌⡐⠠⢙\n" +
+                "⡐⡐⠨⢐⠠⠂⠅⠌⠌⡐⡐⢐⠨⠈⠌⢯⡁⢈⠈⠠⠉⡉⢡⢩⡻⡌⢏⠉⡉⠘⡌⠌⡐⢐⠠⠹⣳⢽⡺⣽⢽⢽⢵⡳⣵⣫⢯⣫⢯⣳⢽⢵⡻⡌⠄⠅⡂⠂⠅⡂\n" +
+                "⡂⣂⣑⣐⣨⣈⣌⣰⣡⣢⣰⣰⣬⣨⣬⣸⣢⠂⠈⡆⡁⠄⡏⡄⡳⣜⢰⠀⢢⠁⠘⢆⢲⢑⢙⢾⢽⢽⢽⢵⢯⢯⣳⡻⣺⣪⢷⣫⢗⣗⢯⡳⡯⣟⢤⢁⠂⠅⡁⡂\n" +
+                "⢂⢿⣿⡿⡿⣟⡿⣟⡯⢿⠿⡻⠾⡯⡿⡽⡎⡆⢁⠸⡀⠄⠸⢇⠯⡸⢎⡆⠘⡄⢁⠘⡎⢓⢊⠫⢓⢯⣗⣯⣳⣫⢞⡾⡵⣯⡳⣝⣗⡽⣳⣫⢯⢗⣝⢦⠨⢐⢀⢢\n" +
+                "⠄⡇⡢⢱⠉⠒⢪⡂⡊⡢⡑⢌⢊⠢⡑⡰⡹⣊⣠⣀⣁⣐⣈⣈⣀⣂⡠⣐⡀⡌⡀⢄⢱⢐⠠⠨⢐⠐⢗⠷⣵⣫⢯⢯⣫⣞⣞⡗⣗⠽⠵⢓⢫⢇⡗⣕⢧⢂⠒⡁\n" +
+                "⢁⢺⠨⡊⡆⠁⢸⡐⡑⠔⢌⠢⡡⡑⢌⠢⢩⠩⡑⡕⡑⡑⡑⡑⡑⢒⠑⠕⡑⡃⡋⡓⢛⠠⠨⢈⢐⠨⢘⡔⡀⢂⠩⠁⠅⡐⡀⡂⠄⠅⠌⡐⣸⢽⢨⡞⡎⡯⣲⢲\n" +
+                "⠂⠌⡇⡢⠣⡊⢎⠢⣑⢅⣕⣑⡔⣌⣢⣑⣅⢕⢔⢵⠠⢂⢐⠠⢂⠂⠅⡡⢂⠐⠄⡂⠢⠨⠨⢐⠐⡨⢐⠸⡐⠠⠈⠌⡐⡀⡂⠄⠅⠌⡐⢠⠳⡣⣳⢕⡝⡮⡪⡧\n" +
+                "⠁⠅⡛⢛⠛⠫⠛⠝⠎⡓⡚⢒⠓⡓⢊⠒⡊⢃⠋⠕⡑⢐⢐⠨⢐⠨⠐⠄⠅⡊⠔⠨⢐⢁⠊⠔⠨⢐⢐⠨⠸⡬⠬⠴⠰⠰⠤⠕⠜⢒⠊⠅⡂⠹⡕⡧⡫⡮⣳⢹\n" +
+                "⢈⢂⠂⠢⠨⠨⢈⠌⡐⡐⢐⢐⠐⠄⠅⠌⠄⠅⡊⠔⠨⢐⠠⢊⢐⠨⢈⠌⡐⠄⠅⡑⡐⠠⠡⠡⢑⠐⡀⡊⡐⢹⠈⡊⡉⠊⠅⠍⡊⠢⠉⠍⡈⣢⢟⢎⡗⡽⣸⢵\n" +
+                "⠦⢔⠬⠬⢔⠥⡢⠬⡔⢤⠥⡢⢬⠢⡥⠥⠥⠥⡢⠥⠥⡆⡎⢦⠲⡪⡲⡚⡖⡳⢳⠲⡲⡓⡗⢞⠖⢞⢲⢒⢓⢕⢻⢜⢎⡏⣏⠯⣽⢍⠫⣏⢯⢺⡪⣳⡹⣪⡳⣕\n");
+    }
+
     void init() {
-        System.out.println("[로그인]");
+        loginImg();
+        System.out.println("=".repeat(80));
+        sortTitle("[로그인]");
+        System.out.println("-".repeat(80));
+//        System.out.println("[로그인]");
         while (true) {
             printLoginMenu();
             String command = Prompt.input(">");
@@ -93,7 +123,48 @@ public class App {
     private void printLoginMenu() {
         int count = 1;
         for (String menu : loginMenus) {
-            System.out.printf("%s. %s\n", count++, menu);
+            sortCLI(count++, menu);
         }
+    }
+
+    private void sortTitle(String text){
+        // 터미널 너비 (고정된 값으로 가정, 일반적인 터미널 너비는 80)
+        int terminalWidth = 78;
+
+        // 텍스트 길이
+        int textLength = text.length();
+
+        // 가운데 정렬을 위해 앞에 추가할 공백의 수 계산
+        int padding = (terminalWidth - textLength) / 2;
+
+        // 공백 생성
+        StringBuilder menu = new StringBuilder();
+        menu.append(" ".repeat(Math.max(0, padding)));
+
+        // 텍스트 추가
+        menu.append(text);
+        // 출력
+        System.out.println(menu);
+    }
+
+    private void sortCLI(int count, String text){
+        // 터미널 너비 (고정된 값으로 가정, 일반적인 터미널 너비는 80)
+        int terminalWidth = 78;
+
+        String st = String.format("%d. %s",  count, text);
+        // 텍스트 길이
+        int textLength = st.length();
+
+        // 가운데 정렬을 위해 앞에 추가할 공백의 수 계산
+        int padding = (terminalWidth - textLength) / 2;
+
+        // 공백 생성
+        StringBuilder menu = new StringBuilder();
+        menu.append(" ".repeat(Math.max(0, padding)));
+
+        // 텍스트 추가
+        menu.append(st);
+        // 출력
+        System.out.println(menu);
     }
 }
