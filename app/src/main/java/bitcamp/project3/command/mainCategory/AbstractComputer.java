@@ -27,17 +27,16 @@ public abstract class AbstractComputer implements Command{
                 printMenus();
                 continue;
             }
-
+            if (command.equals("0")) {
+                menuPath.pop();
+                return;
+            }
             try {
                 int menuNo = Integer.parseInt(command);
                 String menuName = getMenuTitle(menuNo);
                 if (menuName == null) {
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
                     continue;
-                }
-                if (menuName.equals("뒤로가기")) {
-                    menuPath.pop();
-                    return;
                 }
                 processMenu(menuName, user);
 
@@ -53,6 +52,7 @@ public abstract class AbstractComputer implements Command{
         for (int i = 0; i < menus.length; i++) {
             System.out.printf("%d. %s\n", (i + 1), menus[i]);
         }
+        System.out.println("0. 뒤로가기");
     }
 
     private String getMenuTitle(int menuNo) {

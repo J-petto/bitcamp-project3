@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Computer extends AbstractComputer {
   TakeOutManager test = new TakeOutManager();
-  String[] menus = {"책 조회", "책 반납", "뒤로가기"};
+  String[] menus = {"책 조회", "책 반납"};
   private Map<String, List<TakeOutRecord>> userTakes;
 
   public Computer(String menuTitle) {
@@ -58,15 +58,15 @@ public class Computer extends AbstractComputer {
     String twoLine = "=========================================================";
     String oneLine = "---------------------------------------------------------";
     System.out.println(twoLine);
-    System.out.println("| 대여한 책 이름                           |   대여일   |");
+    System.out.println("| 대여한 책 이름                           |   반납일   |");
     System.out.println(oneLine);
 
     for (TakeOutRecord value : values) {
       String bookTitle = value.getTakesOutBook().getBookTitle();
       printSort(bookTitle);
-      LocalDate loneDate = value.getTakesOutDate();
+      LocalDate loneDate = value.getTakesOutDate().plusDays(14);
       LocalDate today = LocalDate.now();
-      String isOverdue = ChronoUnit.DAYS.between(loneDate, today) > 14 ?
+      String isOverdue = loneDate.isBefore(today) ?
           ansiRed + loneDate + ansiEnd :
           String.valueOf(loneDate);
       System.out.printf(" %s |\n", isOverdue);
