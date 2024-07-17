@@ -14,7 +14,7 @@ public class TakeOutManager implements Serializable {
     this.userTakes = new HashMap<>();
   }
 
-  private void saveTakes(User user) {
+  public void saveTakes(User user) {
     String userHome = System.getProperty("user.home");
     String userID = user.getUserID();
     String filePath = userHome + "/git/bitcamp-project3/database/taken/" + userID + "_takeout.dat";
@@ -24,6 +24,10 @@ public class TakeOutManager implements Serializable {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void updateUserTakes(String userID, List<TakeOutRecord> updatedValues) {
+    this.userTakes.put(userID, updatedValues);
   }
 
   public Map<String, List<TakeOutRecord>> loadTakes(User user) {

@@ -7,20 +7,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
-public class dataReader {
+public class BookDataReader {
     private final List<Book> books;
-    private static dataReader instance;
+    private static BookDataReader instance;
 
-    private dataReader() {
+    private BookDataReader() {
         books = new ArrayList<>();
         initializeBooks();
     }
 
-    public static dataReader getInstance() {
+    public static BookDataReader getInstance() {
         if (instance == null) {
-            instance = new dataReader();
+            instance = new BookDataReader();
         }
         return instance;
     }
@@ -34,8 +33,8 @@ public class dataReader {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length == 5) {
-                    books.add(new Book(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4])));
+                if (parts.length == 4) {
+                    books.add(new Book(parts[0], parts[1], parts[2], parts[3]));
                 }
             }
         } catch (IOException e) {

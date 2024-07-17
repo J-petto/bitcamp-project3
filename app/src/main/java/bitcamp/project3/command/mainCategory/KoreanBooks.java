@@ -1,6 +1,6 @@
 package bitcamp.project3.command.mainCategory;
 
-import bitcamp.project3.command.subCategory.Humanities;
+import bitcamp.project3.command.subCategory.TakeOutCommand;
 import bitcamp.project3.command.subCategory.SubCommand;
 import bitcamp.project3.vo.User;
 
@@ -12,10 +12,10 @@ public class KoreanBooks extends AbstractCommand {
     HashMap<String, SubCommand> subHash = new HashMap<>();
     public KoreanBooks(String menuTitle) {
         super(menuTitle);
-        subHash.put("인문학", new Humanities("인문학"));
-        subHash.put("자기계발", new Humanities("자기계발"));
-        subHash.put("경제", new Humanities("경제"));
-        subHash.put("과학", new Humanities("과학"));
+        subHash.put("인문학", new TakeOutCommand("인문학"));
+        subHash.put("자기계발", new TakeOutCommand("자기계발"));
+        subHash.put("경제", new TakeOutCommand("경제"));
+        subHash.put("과학", new TakeOutCommand("과학"));
     }
 
     @Override

@@ -2,7 +2,7 @@ package bitcamp.project3.command.subCategory;
 
 import bitcamp.project3.util.FileHandler;
 import bitcamp.project3.util.Prompt;
-import bitcamp.project3.util.dataReader;
+import bitcamp.project3.util.BookDataReader;
 import bitcamp.project3.vo.Book;
 import bitcamp.project3.vo.TakeOutManager;
 import bitcamp.project3.vo.TakeOutRecord;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Humanities extends AbstractSubCommand {
+public class TakeOutCommand extends AbstractSubCommand {
   FileHandler takeOutList = new FileHandler();
-  dataReader reader = dataReader.getInstance();
+  BookDataReader reader = BookDataReader.getInstance();
   List<Book> books = reader.getBooks();
   TakeOutManager test = new TakeOutManager();
   List<String> takenBooks = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Humanities extends AbstractSubCommand {
 
   protected String menuTitle;
 
-  public Humanities(String menuTitle) {
+  public TakeOutCommand(String menuTitle) {
     super(menuTitle);
   }
 
