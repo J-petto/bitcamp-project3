@@ -1,6 +1,7 @@
 package bitcamp.project3.vo;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,15 +45,36 @@ public class TakeOutManager implements Serializable {
   }
 
   public void takeOut(User user, Book book) {
-    userTakes=loadTakes(user);
+    userTakes = loadTakes(user);
     List<TakeOutRecord> records = userTakes.getOrDefault(user.getUserID(), new ArrayList<>());
-    if (records.size() > MAX_LIMIT-1) {
+    if (records.size() > MAX_LIMIT - 1) {
       System.out.println("대출 한도를 초과했습니다.");
+    } else if (user.isBlack()) {
+      System.out.println("현재 도서가 연체중입니다." +
+          "먼저 책을 반납해주세요~");
     } else {
       records.add(new TakeOutRecord(book));
       userTakes.put(user.getUserID(), records);
       System.out.println("도서 " + book.getBookTitle() + " 을(를) 대출했습니다.");
       saveTakes(user);
+    }
+  }
+
+  public void isOverdue(User user, Map<String, List<TakeOutRecord>> userTakes) {
+    userTakes = loadTakes(user);
+    if (userTakes.containsKey(user.getUserID())) {
+      List<TakeOutRecord> values = userTakes.get(user.getUserID());
+      for (TakeOutRecord value : values) {
+        LocalDate loneDate = value.getTakesOutDate().plusDays(14);
+        LocalDate today = LocalDate.now();
+        String isOverdue;
+        if (loneDate.isBefore(today)) {
+          user.setBlack(true);
+        } else {
+//          isOverdue = String.valueOf(loneDate);
+          user.setBlack(false);
+        }
+      }
     }
   }
 

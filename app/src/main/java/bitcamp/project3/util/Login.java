@@ -1,8 +1,12 @@
 package bitcamp.project3.util;
 
+import bitcamp.project3.vo.TakeOutManager;
+import bitcamp.project3.vo.TakeOutRecord;
 import bitcamp.project3.vo.User;
 
 import java.io.*;
+import java.util.List;
+import java.util.Map;
 
 public class Login {
   public static User loginUser() {
@@ -24,7 +28,13 @@ public class Login {
           System.out.println("유효하지 않은 비밀번호 입니다.");
           count++;
         } else {
+          TakeOutManager test = new TakeOutManager();
+          Map<String, List<TakeOutRecord>> userTakes = test.loadTakes(user);
           System.out.println("로그인 성공 !");
+          test.isOverdue(user, userTakes);
+          if(user.isBlack()) {
+            System.out.printf("%s님 대출하신 도서를 반납해주세요!\n", user.getUserName());
+          }
           System.out.printf("%s님 접속하셨습니다.\n", user.getUserName());
           break;
         }

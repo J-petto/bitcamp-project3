@@ -54,7 +54,7 @@ public class Computer extends AbstractComputer {
     userTakes = test.loadTakes(user);
     if (userTakes.containsKey(user.getUserID())) {
       List<TakeOutRecord> values = userTakes.get(user.getUserID());
-      printBookCheck(values);
+      printBookCheck(values, user);
     } else {
       System.out.println(user.getUserID() + "님은 현재 대출 중인 도서가 없습니다.");
     }
@@ -82,7 +82,7 @@ public class Computer extends AbstractComputer {
     userTakes = test.loadTakes(user);
     if (userTakes.containsKey(user.getUserID())) {
       List<TakeOutRecord> values = userTakes.get(user.getUserID());
-      printBookCheck(values);
+      printBookCheck(values, user);
       String command = Prompt.input("반납하실 책의 이름을 입력해주세요.\n");
       Iterator<TakeOutRecord> iterator = values.iterator();
       boolean found = false;
@@ -106,7 +106,7 @@ public class Computer extends AbstractComputer {
     }
   }
 
-  private void printBookCheck(List<TakeOutRecord> values) {
+  private void printBookCheck(List<TakeOutRecord> values, User user) {
     String ansiRed = "\u001B[31m";
     String ansiEnd = "\u001B[0m";
     String twoLine = "=========================================================";
@@ -120,9 +120,13 @@ public class Computer extends AbstractComputer {
       printSort(bookTitle);
       LocalDate loneDate = value.getTakesOutDate().plusDays(14);
       LocalDate today = LocalDate.now();
-      String isOverdue = loneDate.isBefore(today) ?
-          ansiRed + loneDate + ansiEnd :
-          String.valueOf(loneDate);
+      String isOverdue;
+      if (loneDate.isBefore(today)) {
+        isOverdue = ansiRed + loneDate + ansiEnd;
+        user.setBlack(true);
+      } else {
+        isOverdue=String.valueOf(loneDate);
+      }
       System.out.printf(" %s |\n", isOverdue);
     }
     System.out.println(twoLine);
