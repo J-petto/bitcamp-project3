@@ -29,6 +29,7 @@ public abstract class AbstractComputer implements Command{
             }
             if (command.equals("0")) {
                 menuPath.pop();
+                mapPrinter.printBox(menuPath, "로비");
                 return;
             }
             try {

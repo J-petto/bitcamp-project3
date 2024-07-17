@@ -54,7 +54,7 @@ public class Computer extends AbstractComputer {
     userTakes = test.loadTakes(user);
     if (userTakes.containsKey(user.getUserID())) {
       List<TakeOutRecord> values = userTakes.get(user.getUserID());
-      printBookCheck(values, user);
+      printBookCheck(values, false);
     } else {
       System.out.println(user.getUserID() + "님은 현재 대출 중인 도서가 없습니다.");
     }
@@ -77,26 +77,63 @@ public class Computer extends AbstractComputer {
   }
 
 
+//  private void bookReturn(User user) {
+//    System.out.println("조회중 . . .");
+//    userTakes = test.loadTakes(user);
+//    if (userTakes.containsKey(user.getUserID())) {
+//      List<TakeOutRecord> values = userTakes.get(user.getUserID());
+//      printBookCheck(values, true);
+//      String command = Prompt.input("반납하실 책의 이름을 입력해주세요.\n");
+//      Iterator<TakeOutRecord> iterator = values.iterator();
+//      boolean found = false;
+//      while (iterator.hasNext()) {
+//        TakeOutRecord value = iterator.next();
+//        if (value.getTakesOutBook().getBookTitle().equals(command)) {
+//          iterator.remove();
+//          found = true;
+//          System.out.println("도서 " + command + "(이)가 성공적으로 반납되었습니다.");
+//          break;
+//        }
+//      }
+//      if (!found) {
+//        System.out.println("입력하신 이름의 책을 찾을 수 없습니다.");
+//      } else {
+//        test.updateUserTakes(user.getUserID(), values);
+//        test.saveTakes(user);
+//      }
+//    } else {
+//      System.out.println(user.getUserID() + "님은 현재 대출 중인 도서가 없습니다.");
+//    }
+//  }
+
   private void bookReturn(User user) {
     System.out.println("조회중 . . .");
     userTakes = test.loadTakes(user);
     if (userTakes.containsKey(user.getUserID())) {
       List<TakeOutRecord> values = userTakes.get(user.getUserID());
-      printBookCheck(values, user);
-      String command = Prompt.input("반납하실 책의 이름을 입력해주세요.\n");
+      printBookCheck(values, true);
+      //            String command = Prompt.input("반납하실 책의 이름을 입력해주세요.\n");
+      String command = Prompt.input("반납하실 책의 번호를 입력해주세요.");
+      int bookNo = -1;
+      try {
+        bookNo = Integer.parseInt(command);
+      } catch (NumberFormatException e) {
+        System.out.println("숫자로 입력해주세요.");
+      }
       Iterator<TakeOutRecord> iterator = values.iterator();
       boolean found = false;
       while (iterator.hasNext()) {
         TakeOutRecord value = iterator.next();
-        if (value.getTakesOutBook().getBookTitle().equals(command)) {
+        if (value.getTakesOutBook().getBookCode() == bookNo) {
           iterator.remove();
           found = true;
-          System.out.println("도서 " + command + "(이)가 성공적으로 반납되었습니다.");
+          System.out.println(
+              "도서 " + value.getTakesOutBook().getBookTitle() + "(이)가 성공적으로 반납되었습니다.");
           break;
         }
       }
       if (!found) {
-        System.out.println("입력하신 이름의 책을 찾을 수 없습니다.");
+        System.out.println("입력하신 번호의 책을 찾을 수 없습니다.");
       } else {
         test.updateUserTakes(user.getUserID(), values);
         test.saveTakes(user);
@@ -106,27 +143,55 @@ public class Computer extends AbstractComputer {
     }
   }
 
-  private void printBookCheck(List<TakeOutRecord> values, User user) {
+  private void printBookCheck(List<TakeOutRecord> values, boolean isNeedNo) {
     String ansiRed = "\u001B[31m";
     String ansiEnd = "\u001B[0m";
-    String twoLine = "=========================================================";
-    String oneLine = "---------------------------------------------------------";
+
+    String twoLine = isNeedNo ?
+        "===============================================================================" :
+        "======================================================================";
+    String oneLine = isNeedNo ?
+        "-------------------------------------------------------------------------------" :
+        "----------------------------------------------------------------------";
+    String title = isNeedNo ?
+        "| 책번호 | 대여한 책 이름                           |   대출일   |   반납일   |" :
+        "| 대여한 책 이름                           |   대출일   |   반납일   |";
+
     System.out.println(twoLine);
-    System.out.println("| 대여한 책 이름                           |   반납일   |");
+    System.out.println(title);
     System.out.println(oneLine);
 
+//    for (TakeOutRecord value : values) {
+//      String bookTitle = value.getTakesOutBook().getBookTitle();
+//      printSort(bookTitle);
+//      LocalDate loneDate = value.getTakesOutDate().plusDays(14);
+//      LocalDate today = LocalDate.now();
+//      String isOverdue;
+//      if (loneDate.isBefore(today)) {
+//        isOverdue = ansiRed + loneDate + ansiEnd;
+//      } else {
+//        isOverdue = String.valueOf(loneDate);
+//      }
+//      System.out.printf(" %s |\n", isOverdue);
+//    }
+//    System.out.println(twoLine);
+
     for (TakeOutRecord value : values) {
+      if (isNeedNo) {
+        int no = value.getTakesOutBook().getBookCode();
+        System.out.printf("| %-5d  ", no);
+      }
       String bookTitle = value.getTakesOutBook().getBookTitle();
       printSort(bookTitle);
-      LocalDate loneDate = value.getTakesOutDate().plusDays(14);
+
+      LocalDate loneDate = value.getTakesOutDate();
+      LocalDate returnDate = value.getTakesOutDate().plusDays(14);
       LocalDate today = LocalDate.now();
-      String isOverdue;
-      if (loneDate.isBefore(today)) {
-        isOverdue = ansiRed + loneDate + ansiEnd;
-        user.setBlack(true);
-      } else {
-        isOverdue=String.valueOf(loneDate);
-      }
+
+      System.out.printf(" %s |", loneDate);
+
+      String isOverdue =
+          returnDate.isBefore(today) ? ansiRed + returnDate + ansiEnd : String.valueOf(returnDate);
       System.out.printf(" %s |\n", isOverdue);
     }
     System.out.println(twoLine);
