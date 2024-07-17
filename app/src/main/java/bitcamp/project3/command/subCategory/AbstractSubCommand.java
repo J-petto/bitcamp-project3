@@ -107,12 +107,12 @@ public abstract class AbstractSubCommand implements SubCommand{
     }
 
     private String getMenuTitle(int menuNo) {
-        List<Book> menus = getMenus();
+        List<Book> menus = sortBooks;
         return isValidateMenu(menuNo) ? menus.get(menuNo - 1).getBookTitle() : null;
     }
 
     private boolean isValidateMenu(int menuNo) {
-        List<Book> menus = getMenus();
+        List<Book> menus = sortBooks;
         return menuNo >= 1 && menuNo <= menus.size();
     }
 
