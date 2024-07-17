@@ -46,7 +46,6 @@ public class Computer extends AbstractComputer {
       case "책 검색":
         bookCheck();
         break;
-      case "뒤로가기":
     }
   }
 

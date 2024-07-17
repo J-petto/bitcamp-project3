@@ -39,6 +39,7 @@ public class MainMenu {
                 continue;
             }
             if(command.equals("0")){
+                menuPath.pop();
                 break;
             }
             try {
