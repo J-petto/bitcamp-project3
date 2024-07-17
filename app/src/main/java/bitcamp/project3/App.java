@@ -29,10 +29,6 @@ public class App {
   }
 
   void init() {
-    loginImg();
-    System.out.println("=".repeat(80));
-    sortTitle("[로그인]");
-    System.out.println("-".repeat(80));
     //        System.out.println("[로그인]");
     while (true) {
       printLoginMenu();
@@ -55,7 +51,7 @@ public class App {
             case "회원가입":
               Login.authUser();
               break;
-            case "비밀번호 찾기":
+            case "재설정":
               Login.reSetUserPassword();
               break;
             case "종료":
@@ -108,9 +104,14 @@ public class App {
 
   private void printLoginMenu() {
     int count = 1;
+    loginImg();
+    System.out.println("=".repeat(80));
+    sortTitle("[로그인]");
+    System.out.println("-".repeat(80));
     for (String menu : loginMenus) {
       sortCLI(count++, menu);
     }
+    System.out.println("-".repeat(80));
   }
 
   private void sortTitle(String text) {
